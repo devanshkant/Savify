@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: savify-backend
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/Savify
+    username: '${DATABASE_USERNAME}'
+    password: '${DATABASE_PASSWORD}'
+    driver-class-name: org.postgresql.Driver # <-- Added explicitly
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect # <-- Flattened and corrected
+    hibernate:
+      ddl-auto: update
+    show-sql: true
