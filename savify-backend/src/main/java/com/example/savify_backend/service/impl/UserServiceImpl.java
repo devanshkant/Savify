@@ -37,4 +37,15 @@ public class UserServiceImpl implements UserService {
 
         return userRepository.save(user);
     }
+
+    @Override
+    public User loginUser(LoginRequest loginRequest) {
+        User user = userRepository.findByEmail(loginRequest.getEmail())
+                .orElseThrow(() -> new RuntimeException("Invalid e-mail or password")
+                );
+        if(!user.getPassword().equals(loginRequest.getPassword())){
+            throw new RuntimeException("Invalid e-mail or password");
+        }
+        return user;
+    }
 }

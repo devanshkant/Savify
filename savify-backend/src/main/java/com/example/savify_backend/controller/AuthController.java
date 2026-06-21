@@ -1,5 +1,6 @@
 package com.example.savify_backend.controller;
 
+import com.example.savify_backend.dto.LoginRequest;
 import com.example.savify_backend.dto.RegisterRequest;
 import com.example.savify_backend.entities.User;
 import com.example.savify_backend.service.UserService;
@@ -21,5 +22,10 @@ public class AuthController {
     public ResponseEntity<User> createUser(@RequestBody RegisterRequest registerRequest) {
         User savedUser = userService.registerUser(registerRequest);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+    }
+    @PostMapping("/login")
+    public ResponseEntity<User> login(@RequestBody LoginRequest loginRequest) {
+        User authenticatedUser = userService.loginUser(loginRequest);
+        return new ResponseEntity<>(authenticatedUser, HttpStatus.OK);
     }
 }
