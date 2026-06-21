@@ -1,5 +1,6 @@
 package com.example.savify_backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,10 +28,10 @@ public class User {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "blood_group")
     private BloodGroup bloodGroup;
 
-    @Column(name = "is_available", nullable = false)
+    @Column(name = "is_available")
     private boolean isAvailable;
 
     @Column(nullable = false)
@@ -43,5 +44,6 @@ public class User {
     private Role role;
 
     @Column(columnDefinition = "geometry(Point, 4326)")
+    @JsonIgnore
     private Point location;
 }
