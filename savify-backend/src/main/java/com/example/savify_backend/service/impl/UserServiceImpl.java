@@ -8,6 +8,7 @@ import com.example.savify_backend.service.UserService;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
+import org.locationtech.jts.geom.PrecisionModel;
 import org.springframework.stereotype.Service;
 
 
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final GeometryFactory geometryFactory =
-            new GeometryFactory(new org.locationtech.jts.geom.PrecisionModel(), 4326);
+            new GeometryFactory(new PrecisionModel(), 4326);
 
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
