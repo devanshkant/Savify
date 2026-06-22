@@ -1,5 +1,6 @@
 package com.example.savify_backend.service.impl;
 
+import com.example.savify_backend.dto.AvailabilityRequest;
 import com.example.savify_backend.dto.LoginRequest;
 import com.example.savify_backend.dto.RegisterRequest;
 import com.example.savify_backend.entities.User;
@@ -48,5 +49,13 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("Invalid e-mail or password");
         }
         return user;
+    }
+
+    @Override
+    public User updateAvailability(AvailabilityRequest request) {
+        User user = userRepository.findById(request.getId())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        user.setAvailable(request.isAvailable());
+        return userRepository.save(user);
     }
 }
