@@ -31,8 +31,8 @@ public class User {
     @Column(name = "blood_group")
     private BloodGroup bloodGroup;
 
-    @Column(name = "is_available")
-    private boolean isAvailable;
+    @Column(name = "is_available", nullable = true)
+    private Boolean isAvailable;
 
     @Column(nullable = false)
     private String contact;

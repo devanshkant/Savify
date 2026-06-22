@@ -7,5 +7,5 @@ import lombok.Getter;
 @Setter
 public class AvailabilityRequest {
     private Long id;
-    private boolean available;
+    private Boolean available;
 }

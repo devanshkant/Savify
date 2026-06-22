@@ -12,6 +12,7 @@ import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.geom.PrecisionModel;
 import org.springframework.stereotype.Service;
 
+import static com.example.savify_backend.entities.Role.*;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -32,7 +33,17 @@ public class UserServiceImpl implements UserService {
         user.setContact(request.getContact());
         user.setRole(request.getRole());
         user.setAddress(request.getAddress());
-        user.setBloodGroup(request.getBloodGroup());
+        if(request.getRole() == DONOR)
+            user.setBloodGroup(request.getBloodGroup());
+        else
+            user.setBloodGroup(null);
+        // set availability: hospitals should have null
+        if(request.getRole() == DONOR)
+            user.setIsAvailable(false);
+        else if(request.getRole() == HOSPITAL)
+            user.setIsAvailable(null);
+        else
+            user.setIsAvailable(false);
         Coordinate coordinate = new Coordinate(request.getLongitude(), request.getLatitude());
         Point locationPoint = geometryFactory.createPoint(coordinate);
         user.setLocation(locationPoint);
@@ -55,7 +66,7 @@ public class UserServiceImpl implements UserService {
     public User updateAvailability(AvailabilityRequest request) {
         User user = userRepository.findById(request.getId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        user.setAvailable(request.isAvailable());
+        user.setIsAvailable(request.getAvailable());
         return userRepository.save(user);
     }
 }
