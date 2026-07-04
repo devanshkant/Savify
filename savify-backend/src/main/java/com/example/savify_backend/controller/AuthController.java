@@ -1,6 +1,7 @@
 package com.example.savify_backend.controller;
 
 import com.example.savify_backend.dto.LoginRequest;
+import com.example.savify_backend.dto.LoginResponse;
 import com.example.savify_backend.dto.RegisterRequest;
 import com.example.savify_backend.entities.User;
 import com.example.savify_backend.service.UserService;
@@ -15,17 +16,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/auth")
 public class AuthController {
     private final UserService userService;
+
     public AuthController(UserService userService) {
         this.userService = userService;
     }
+
     @PostMapping("/register")
     public ResponseEntity<User> createUser(@RequestBody RegisterRequest registerRequest) {
         User savedUser = userService.registerUser(registerRequest);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
+
     @PostMapping("/login")
-    public ResponseEntity<User> login(@RequestBody LoginRequest loginRequest) {
-        User authenticatedUser = userService.loginUser(loginRequest);
-        return new ResponseEntity<>(authenticatedUser, HttpStatus.OK);
+    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
+        LoginResponse loginResponse = userService.loginUser(loginRequest);
+        return new ResponseEntity<>(loginResponse, HttpStatus.OK);
     }
 }

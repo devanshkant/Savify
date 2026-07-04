@@ -1,7 +1,8 @@
 spring:
   application:
     name: savify-backend
-
+  main:
+    allow-circular-references: true
   datasource:
     url: jdbc:postgresql://localhost:5432/Savify
     username: '${DATABASE_USERNAME}'
@@ -13,3 +14,7 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+jwt:
+  expiration-ms: 86400000
+  secret-key: ${JWT_SECRET_KEY}
