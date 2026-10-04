@@ -1,3 +1,5 @@
 .idea/
-.env
+*/.env
 extra/
+str.txt
+front.md
